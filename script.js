@@ -8,6 +8,7 @@ class Calculator {
   clear() {
     this.currentOperand = "";
     this.previousOperand = "";
+    this.previousView = "";
     this.operation = undefined;
     this.updateDisplay();
   }
@@ -27,6 +28,7 @@ class Calculator {
     if (this.currentOperand === "") return;
     this.operation = operation;
     this.previousOperand = this.currentOperand;
+    this.previousView = `${this.currentOperand} ${this.operation}`;
     this.currentOperand = "";
     this.updateDisplay();
   }
@@ -35,6 +37,9 @@ class Calculator {
     let result;
     const prev = parseFloat(this.previousOperand);
     const curr = parseFloat(this.currentOperand);
+    console.log(this.previousOperand);
+    console.log(prev);
+    console.log(curr);
     if (isNaN(prev) || isNaN(curr)) return;
     switch (this.operation) {
       case "+":
@@ -52,18 +57,16 @@ class Calculator {
       default:
         return;
     }
-    this.currentOperand = result;
-    this.operation = undefined;
+    this.previousView = `${this.previousOperand} ${this.operation} ${this.currentOperand}`;
+    this.currentOperand = result.toString();
     this.previousOperand = "";
+    this.operation = undefined;
     this.updateDisplay();
   }
 
   updateDisplay() {
     this.currentOperandElement.innerText = this.currentOperand;
-    this.previousOperandElement.innerText = this.previousOperand;
-    // if (this.operation != null) {
-    //   this.previousOperandElement.innerText = `${this.previousOperand} ${this.operation}`;
-    // }
+    this.previousOperandElement.innerText = this.previousView;
   }
 }
 
