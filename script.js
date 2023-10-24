@@ -5,12 +5,14 @@ const operationButtons = document.querySelectorAll(".operation");
 const equalsButton = document.querySelector(".equals");
 const deleteButton = document.querySelector(".delete");
 const clearButton = document.querySelector(".clear");
-const previousOperandElement = document.querySelector(".previous-operand");
-const currentOperandElement = document.querySelector(".current-operand");
+const previousExpressionElement = document.querySelector(
+  ".previous-expression"
+);
+const currentExpressionElement = document.querySelector(".current-expression");
 
 const calculator = new Calculator(
-  previousOperandElement,
-  currentOperandElement
+  previousExpressionElement,
+  currentExpressionElement
 );
 
 numberButtons.forEach((button) => {
@@ -21,7 +23,7 @@ numberButtons.forEach((button) => {
 
 operationButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    calculator.chooseOperation(button.innerText);
+    calculator.appendOperation(button.innerText);
   });
 });
 
